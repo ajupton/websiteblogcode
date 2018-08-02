@@ -13,16 +13,16 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Interactive Archaeology
 
-When most folks think about archaeology, there is a tendency to think about an extinct human past. For example, viewing the artifacts of the archaeological world in museums often sanitizes them as being stuck in a static past and of no consequence to the human present. In an effort to breath life into our shared human heritage, I've endeavored to provide an interactive dashboard to my archaeological colleagues and the public alike. This post details the technical aspects of creating a creating such an interactive experience using Flexdashboard and Shiny in the R statistical language. The dashboard highlights a number of my personal interests in programming, including the creation of interactive social network models, interactive exploratory data analysis, and bringing statistical reports to an online format. By the end of this tutorial, you should have a solid foundation on how to build an interactive document using Shiny and Flexdashboard in R!
+When most folks think about archaeology, there is a tendency to think about an extinct human past. For example, viewing the artifacts of the archaeological world in museums often sanitizes them as being stuck in a static past and of no consequence to the human present. In an effort to breathe life into our shared human heritage, I've endeavored to provide an interactive dashboard to my archaeological colleagues and the public alike. This post details the technical aspects of creating a creating such an interactive experience using Flexdashboard and Shiny in the R statistical language. The dashboard highlights a number of my personal interests in programming, including the creation of interactive social network models, interactive exploratory data analysis, and bringing statistical reports to an online format. By the end of this tutorial, you should have a solid foundation on how to build an interactive document using Shiny and Flexdashboard in R!
 
-[Here is a direct link to the dashboard discussed in this post.](https://aupton.shinyapps.io/CeramicDashboard/)
+[Here is a direct link to the dashboard discussed in this post. Note the for the best experience, access the dashboard from a desktop or laptop.](https://aupton.shinyapps.io/CeramicDashboard/)
 
 [You can review the full source code for the dashboard here.](https://github.com/ajupton/Ceramic_Dashboard)
 
 
 ## Building a Dashboard with Flexdashboard
 
-If you're more interested in statistical analysis than website design, [flexdashboards](https://rmarkdown.rstudio.com/flexdashboard/index.html) are a great way to gain entry into the online publishing world without much investment in learning a a bunch of new code or having to deal with hosting issues (you can host your flexdashboard on [ShinyApps.io](http://www.shinyapps.io/) at a free pricing tier). 
+If you're more interested in statistical analysis than website design, [flexdashboards](https://rmarkdown.rstudio.com/flexdashboard/index.html) are a great way to gain entry into the online publishing world without much investment in learning a bunch of new code or having to deal with hosting issues (you can host your flexdashboard on [ShinyApps.io](http://www.shinyapps.io/) at a free pricing tier). 
 
 A good dashboard starts out with a good idea about presenting data, an analysis, or both. Maybe you want to allow a user to explore home prices in their area, look at sales data at different time scales, check the tide level, or (like the dashboard presented here) turn a static powerpoint presentation into an interactive online resource.   
 
@@ -49,11 +49,11 @@ output:
 runtime: shiny
 ```
 
-Many great dashboards consist of a single page. In fact, simplicity is often the best recipe depending on your audience. In this case, translating multiple slides and interactive graphs requires the use of multiple pages - something efficiently communicated using a storyboard. [Storyboards](https://rmarkdown.rstudio.com/flexdashboard/using.html#storyboards) are a great way to, just as the name suggests, tell a more expansive story with your dashboard. The interactivity comes from the integration of [Shiny](https://shiny.rstudio.com/). [Themes](https://rmarkdown.rstudio.com/flexdashboard/using.html#themes) are a super easy way to add some flair and appropriate formatting to your dashboard with a minimal amount of effort. Order and tabspace matters in the YAML header, so be carefule and don't be afraid to click Run Document to test things out. 
+Many great dashboards consist of a single page. In fact, simplicity is often the best recipe depending on your audience. In this case, translating multiple slides and interactive graphs requires the use of multiple pages - something efficiently communicated using a storyboard. [Storyboards](https://rmarkdown.rstudio.com/flexdashboard/using.html#storyboards) are a great way to, just as the name suggests, tell a more expansive story with your dashboard. The interactivity comes from the integration of [Shiny](https://shiny.rstudio.com/). [Themes](https://rmarkdown.rstudio.com/flexdashboard/using.html#themes) are a super easy way to add some flair and appropriate formatting to your dashboard with a minimal amount of effort. Order and tabspace matters in the YAML header, so be careful and don't be afraid to click Run Document to test things out. 
 
 ## Pages and Layout
 
-With a storyboard format, you can add multiple pages using a level one markdown header ```==================```. Just put the title of the page above the header and you have the basics of your page ready. On each page, you can take advantage of the various layout options available to flexdashboards. These include the default columns, but these can be changed to rows, navmenues, sidebars, or more. Adjusting this is easy, just use curly brackets after the title of your page but above the markdown header. Like so, 
+With a storyboard format, you can add multiple pages using a level one markdown header ```==================```. Just put the title of the page above the header and you have the basics of your page ready. On each page, you can take advantage of the various layout options available to flexdashboards. These include the default columns, but these can be changed to rows, navmenus, sidebars, or more. Adjusting this is easy, just use curly brackets after the title of your page but above the markdown header. Like so, 
 
 ```{r eval = FALSE, include = TRUE}
 ## Rows instead of columns
@@ -128,9 +128,9 @@ One thing you may notice is that the Title Bars are a bit large. This can be goo
 
 ## Adding Content
 
-Now that the dashboard has a storyboard with navmenues, it's time to begin adding some substantive content. Since my flexdashboard tells a story originally told at a conference via powerpoint, it's useful to add in images in the different pages to set the scene.  
+Now that the dashboard has a storyboard with navmenus, it's time to begin adding some substantive content. Since my flexdashboard tells a story originally told at a conference via powerpoint, it's useful to add in images in the different pages to set the scene.  
 
-Images are easy to add by enclosing the image title or information about the photo in square brackets preceded by an exclamation point and the name of the image file in parenthesis. The exclamation point is used to differentiate the image from a weblink. Make sure the image file is saved in your dashboard's R working directory so it can be displayed. 
+Images are easy to add by enclosing the image title or information about the photo in square brackets preceded by an exclamation point and then followed by the name of the image file in parenthesis. The exclamation point is used to differentiate the image from a weblink. Make sure the image file is saved in your dashboard's R working directory so it can be displayed. 
 
 ```{r eval = FALSE, include = TRUE}
 ## Display an image
@@ -144,12 +144,12 @@ Images are easy to add by enclosing the image title or information about the pho
 
 Sometimes, line breaks aren't added after an image even if you add in spaces in the R Markdown code. You can resolve this by entering ```&nbsp;``` after the image. 
 
-Of course, the true power of the flexdashboard is incorporating analytical code and the interactive power of Shiny. All code, whether R, Python, SQL, etc., needs to be wrapped in three grave accents and a curly bracket header. The hotkey to add in a new code chunk is "CMD + Option + I" on Mac, a hotkey I use all the time. Here is a codechunk (ignore the hashtags):
+Of course, the true power of the flexdashboard is incorporating analytical code and the interactive power of Shiny. All supported code, whether R, Python, SQL, etc., needs to be wrapped in three grave accents and a curly bracket header. The hotkey to add in a new code chunk is "CMD + Option + I" on Mac, a hotkey I use all the time. Here is a codechunk (ignore the hashtags):
 
 ```{r eval = FALSE, include = TRUE}
 #  ```{coding_language  name_of_code_chunk, additional args...}
 
-# Enter some code heree
+# Enter some code here
 
 #  ```
 ```
